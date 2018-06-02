@@ -25,7 +25,7 @@ class ContactController extends Controller
         $contact->setName("benr242");
         $contact->setEmail("benr242@radiussquared.com");
 
-        $form = $this->createForm(ContactType::class);
+        $form = $this->createForm(ContactType::class, $contact);
 
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView()
