@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class WSController extends Controller
 {
     /**
-     * @Route("/", name="indexPage")
+     * @Route("/", name="welcome")
      */
     public function index()
     {
