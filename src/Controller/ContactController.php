@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 class ContactController extends Controller
 {
     /**
@@ -26,7 +29,14 @@ class ContactController extends Controller
         $contact->setEmail("...   email   ...");
 
         $form = $this->createForm(ContactType::class, $contact);
-
+        /*
+        $form = $this->createFormBuilder($contact)
+            ->add('name', TextType::class)
+            //->add('email', EmailType::class)
+            ->add('email', EmailType::class)
+            ->add('number', TextType::class)
+            ->getForm();
+        */
         return $this->render('contact/index.html.twig', [
             'our_form' => $form->createView()
         ]);
