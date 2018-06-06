@@ -25,8 +25,8 @@ class ContactController extends Controller
         */
 
         $contact = new Contact();
-        $contact->setName("..   name   ...");
-        $contact->setEmail("...   email   ...");
+        //$contact->setName("..name...");
+        //$contact->setEmail("...email...");
 
         $form = $this->createForm(ContactType::class, $contact);
         /*
@@ -37,6 +37,15 @@ class ContactController extends Controller
             ->add('number', TextType::class)
             ->getForm();
         */
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()){
+            $contact = $form->getData();
+
+            return $this->redirectToRoute('welcome');
+        }
+
         return $this->render('contact/index.html.twig', [
             'our_form' => $form->createView()
         ]);
