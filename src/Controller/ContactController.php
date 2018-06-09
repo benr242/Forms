@@ -18,7 +18,7 @@ class ContactController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, EntityManagerInterface $em)
+    public function index(Request $request, EntityManagerInterface $em, \Swift_Mailer $mailer)
     {
         /*
         return $this->render('contact/index.html.twig', [
@@ -43,16 +43,39 @@ class ContactController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $contact = $form->getData();
+            $contactFormData = $form->getData();
+            dump($contact);
 
             $em->persist($contact);
             $em->flush();
+
+            $message = (new \Swift_Message('You got Mail!!'))
+                ->setFrom('benr242@gmail.com')
+                ->setTo('benr242@gmail.com')
+                ->setBody('eeeeeeeeee  eeeeeeeeeeee eeeeeeeeeeeeeee eeeeeeeeeee')
+                ;
+
+            $mailer->send($message);
+
             //return $this->redirect('http://www.espn.com/nfl/team/_/name/no/new-orleans-saints');
-            return $this->redirectToRoute('welcome');
+            return $this->redirectToRoute('list', [
+                'contact' => $contact,
+                'msg' => "hello world!!",
+            ]);
         }
 
         return $this->render('contact/index.html.twig', [
             'our_form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route(name="list")
+     */
+    public function list(Request $request, EntityManagerInterface $em)
+    {
+        return $this->render('index/index.html.twig', [
+            'msg' => 'test message'
         ]);
     }
 }
