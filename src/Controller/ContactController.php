@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,11 +42,15 @@ class ContactController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $contactFormData = $form->getData();
+            //$contactFormData = $form->getData();
             dump($contact);
 
             $em->persist($contact);
             $em->flush();
+
+            /*$contacts = $this->getDoctrine()
+                ->getRepository(Contact::class)
+                ->findAll();
 
             $message = (new \Swift_Message('You got Mail!!'))
                 ->setFrom('benr242@gmail.com')
@@ -56,10 +59,9 @@ class ContactController extends Controller
                 ;
 
             $mailer->send($message);
-
+            */
             //return $this->redirect('http://www.espn.com/nfl/team/_/name/no/new-orleans-saints');
             return $this->redirectToRoute('list', [
-                'contact' => $contact,
                 'msg' => "hello world!!",
             ]);
         }
@@ -70,12 +72,12 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route(name="list")
+     * @Route("/list", name="list")
      */
     public function list(Request $request, EntityManagerInterface $em)
     {
         return $this->render('index/index.html.twig', [
-            'msg' => 'test message'
+            'msg' => 'test message',
         ]);
     }
 }
