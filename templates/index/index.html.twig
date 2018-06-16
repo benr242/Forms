@@ -11,7 +11,7 @@
                 {{ dump(contacts) }}
                 {% for key, contact in contacts %}
                     key: {{ key }}
-                   {{ contact.email }}
+                    {{ contact.name }}   :::   {{ contact.email }}   :::   {{ contact.number }}
                     <br>
                 {% endfor %}
             </div>
