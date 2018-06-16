@@ -77,12 +77,16 @@ class ContactController extends Controller
      */
     public function list(Request $request, EntityManagerInterface $em)
     {
-        $contact = $this->getDoctrine()
+        $contacts = $this->getDoctrine()
             ->getRepository(Contact::class)
             ->findAll();
 
+        $mycount = count($contacts);
+        dump("mycount:" . $mycount);
+
         return $this->render('index/index.html.twig', [
             'msg' => 'test message',
+            'contacts' => $contacts,
         ]);
     }
 }

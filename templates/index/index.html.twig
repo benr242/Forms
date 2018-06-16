@@ -3,8 +3,17 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12" style="background-color: #0000FF; color: white; min-height: 25px">
+            <div class="col-6" style="background-color: #0000FF; color: white; min-height: 25px">
                 Hello World: {{ msg }}
+            </div>
+            <div class="col-6">
+                aoeu
+                {{ dump(contacts) }}
+                {% for key, contact in contacts %}
+                    key: {{ key }}
+                   {{ contact.email }}
+                    <br>
+                {% endfor %}
             </div>
         </div>
     </div>
