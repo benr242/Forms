@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 class ContactController extends Controller
 {
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/new", name="new")
      */
     public function index(Request $request, EntityManagerInterface $em, \Swift_Mailer $mailer)
     {
@@ -71,11 +71,16 @@ class ContactController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/list", name="list")
      */
     public function list(Request $request, EntityManagerInterface $em)
     {
+        $contact = $this->getDoctrine()
+            ->getRepository(Contact::class)
+            ->findAll();
+
         return $this->render('index/index.html.twig', [
             'msg' => 'test message',
         ]);
