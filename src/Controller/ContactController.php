@@ -26,7 +26,7 @@ class ContactController extends Controller
         */
 
         $contact = new Contact();
-        $contact->setName("..name...");
+        $contact->setName("NAME");
         //$contact->setEmail("...email...");
 
         $form = $this->createForm(ContactType::class, $contact);
