@@ -34,6 +34,7 @@ class Contact
      * @ORM\Column(type="string")
      */
     private $email;
+
     /**
      * @ORM\Column(type="string")
      */
